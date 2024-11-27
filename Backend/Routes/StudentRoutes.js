@@ -1,12 +1,12 @@
 const express = require('express');
-const { login, signup, complainInfo } = require("../Controller/StudentController");
 const Student = require("../Models/Student");
+const { login ,signup,complainInfo,logout, viewComplain} = require('../Controller/StudentController');
 const router = express.Router()
 
 router.post('/signup',signup)
-//router.post('/Studentlo',login)
 router.post('/login',login)
-// router.get('/',getAllstd)
 router.post('/complain-info',complainInfo);
+router.post('/logout',logout)
+router.get('/complain',viewComplain)
 
 module.exports = router

@@ -1,41 +1,39 @@
+import React, { useState } from 'react';
 import { COMPLAIN_URL } from '@/utils/constatns';
 import axios from 'axios';
-import React, { useState } from 'react';
 import { toast } from 'sonner';
 
 function Complain() {
 
-  // Generate options for Lab Numbers (Lab 1 to Lab 50)
   const labOptions = Array.from({ length: 2 }, (_, index) => `Lab ${index + 1}`);
 
-  // Generate options for Computer Numbers (Computer 1 to Computer 50)
+ 
   const computerOptions = Array.from({ length: 50 }, (_, index) => `Computer ${index + 1}`);
 
-  // State to handle selected lab and computer
+
   const [selectedLab, setSelectedLab] = useState('');
   const [selectedComputer, setSelectedComputer] = useState('');
   const [complain, setcomplain] = useState("");
 
-  // Dynamic button color based on selections
+
   const buttonColor = selectedLab && selectedComputer ? 'bg-green-500' : 'bg-blue-800';
   const handleComplain = async () => {
-    // Ensure all required fields are provided
+
     if (!selectedLab || !selectedComputer || !complain) {
       toast.error("All Fields Required.");
       return;
     }
   
-    // Assuming 'studentId' is available from the logged-in user's context or state
-    const studentId = localStorage.getItem("studentId"); // Example: retrieving from localStorage, adjust as per your actual setup
+
+    const studentId = localStorage.getItem("studentId"); 
   
     if (!studentId) {
       toast.error("Student ID is missing.");
       return;
     }
   
-    // Prepare the data object including the studentId
     const data = {
-      studentId,   // Include the studentId
+      studentId,   
       labnum: selectedLab,
       computernum: selectedComputer,
       copmplaindes: complain,
@@ -47,6 +45,7 @@ function Complain() {
       const response = await axios.post(COMPLAIN_URL, data);
   
       if (response.status === 200) {
+        
         toast.success("Complaint Sent Successfully.");
       }
     } catch (error) {
@@ -63,7 +62,7 @@ function Complain() {
         <p className="text-gray-600 text-center mb-6">We are here to help. Please fill out the details below.</p>
 
         <div className="space-y-4">
-          {/* Dropdown for Lab Number */}
+          
           <select
             className="w-full p-4 text-gray-700 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-800 focus:border-blue-800 transition duration-200"
             value={selectedLab}
@@ -75,7 +74,7 @@ function Complain() {
             ))}
           </select>
 
-          {/* Dropdown for Computer Number */}
+          
           <select
             className="w-full p-4 text-gray-700 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-800 focus:border-blue-800 transition duration-200"
             value={selectedComputer}
@@ -87,7 +86,7 @@ function Complain() {
             ))}
           </select>
 
-          {/* Text input for describing the issue */}
+          
           <input
             type="text"
             placeholder="Tell Your Issue"
@@ -97,7 +96,7 @@ function Complain() {
           />
         </div>
 
-        {/* Submit Button with dynamic color */}
+     
         <button 
   className={`w-full py-3 ${buttonColor} text-white font-semibold rounded-2xl hover:bg-blue-900 transition duration-300`} 
   onClick={handleComplain}
@@ -110,3 +109,5 @@ function Complain() {
 }
 
 export default Complain;
+
+

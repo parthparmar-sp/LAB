@@ -2,14 +2,6 @@ const mongoose = require('mongoose');
 
 // Declare the Schema of the Mongo model
 var studentSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    sreg: {
-        type: String,
-        required: true,
-    },
     role: {
         type: String,
         default: "student",

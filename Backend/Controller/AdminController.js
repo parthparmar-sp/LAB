@@ -1,4 +1,5 @@
 const Admin = require("../Models/Admin");
+const Complain = require("../Models/Complaint");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -122,7 +123,8 @@ const login = async (req, res) => {
         throw new Error(error);
     }
 };
+
 module.exports = {
   register,
-  login,
+  login
 };

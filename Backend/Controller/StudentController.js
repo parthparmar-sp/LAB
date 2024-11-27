@@ -103,8 +103,19 @@ const login = async (req, res) => {
 };
 
 
+const logout= async (req,res)=>{
+  try {
+      
+    res.cookie("jwt","",{maxAge:1,secure:false, sameSite: 'lax',path:"/"});
+      return res.status(200).json({ message: 'Logout successful' }); 
+      
+  } catch (error) {
+      console.error(error); 
+      return res.status(500).json({ message: 'Error during logout', error: error.message });
+  }
+}
 
-
+  
 const complainInfo = async (req, res) => {
   try {
     const { studentId, labnum, computernum, copmplaindes } = req.body;
@@ -142,20 +153,23 @@ const complainInfo = async (req, res) => {
   }
 };
 
-
-
-
-
-
-// const getAllstd = async (req, res, next) => {
-//   const students = await Student.find();
-//   res.json(students);
-// };
+const viewComplain = async (req,res)=>{
+  try {
+    console.log("in view complai");
+    
+    const complain = await Complaint.find().populate("studentId");
+    return res.status(200).json(complain);
+  } catch (error) {
+    return new Error(error);
+  }
+}
 
 module.exports = {
   register,
   login,
+  logout,
   signup,
   complainInfo,
+  viewComplain
   // getAllstd
 };

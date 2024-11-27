@@ -20,7 +20,7 @@ function Herosection() {
           onClick={onGetStarted}
           className="px-10 py-4 bg-orange-500 text-white font-semibold rounded-full shadow-lg hover:bg-orange-600 transform transition-all duration-300 hover:scale-105"
         >
-          Get Started
+         Register
         </button>
       </div>
     </section>
